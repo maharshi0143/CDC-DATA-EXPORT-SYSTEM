@@ -8,6 +8,7 @@ A production-ready, containerized Change Data Capture (CDC) data export system b
 
 ## 📋 Table of Contents
 
+- [Demo Video](#demo-video)
 - [Features](#features)
 - [Architecture](#architecture)
 - [Prerequisites](#prerequisites)
@@ -19,6 +20,12 @@ A production-ready, containerized Change Data Capture (CDC) data export system b
 - [Production Deployment](#production-deployment)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
+
+## 🎥 Demo Video
+
+Project walkthrough and API testing video:
+
+https://drive.google.com/file/d/1yYUOoGjFZyEUlapnBUYM2e_xZsGk9CAT/view?usp=sharing
 
 ## ✨ Features
 
