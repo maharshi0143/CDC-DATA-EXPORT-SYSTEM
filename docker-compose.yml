@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+
+  app:
+    build: .
+    container_name: cdc_export_app
+    ports:
+      - "${APP_PORT:-8080}:8080"
+
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${APP_PORT:-8080}
+      - NODE_ENV=${NODE_ENV:-development}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - VALID_API_KEYS=${VALID_API_KEYS}
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    volumes:
+      - ./output:/app/output
+
+    restart: always
+
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8080/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  db:
+    image: postgres:13
+    container_name: cdc_export_db
+
+    environment:
+      POSTGRES_USER: ${DB_USER:-user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: ${DB_NAME:-mydatabase}
+
+    volumes:
+      - ./seeds:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-user} -d ${DB_NAME:-mydatabase}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    ports:
+      - "${DB_PORT:-5432}:5432"
+
+volumes:
+  postgres_data:  # Named volume for database persistence
