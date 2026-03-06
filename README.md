@@ -750,11 +750,11 @@ Contributions are welcome! Please follow these guidelines:
 
 ## 📄 License
 
-This project is licensed under the ISC License - see the LICENSE file for details.
+###.
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work* - [@yourusername](https://github.com/yourusername)
+- **Maharshi Denuvakonda** - *Initial work* - [@maharshi0143](https://github.com/maharshi0143)
 
 ## 🙏 Acknowledgments
 
